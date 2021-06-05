@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class CarDeliveryTest {
     @BeforeEach
     void setup() {
-        open("http://localhost:9999");
+        open("http://localhost:8080");
     }
 
     @Test
@@ -32,9 +32,8 @@ public class CarDeliveryTest {
         $("[data-test-id=\"notification\"] .notification__content").shouldHave(text(date));
     }
 
-
     @Test
-    void shouldWarningIfInvalidCity() {
+    void shouldErrorInvalidCity() {
         $("[data-test-id=\"city\"] [class=\"input__control\"]").setValue("Оренбург");
         $("[data-test-id=\"date\"] [class=\"input__control\"]").sendKeys(Keys.CONTROL + "A");
         $("[data-test-id=\"date\"] [class=\"input__control\"]").sendKeys(Keys.BACK_SPACE);
@@ -49,7 +48,7 @@ public class CarDeliveryTest {
     }
 
     @Test
-    void shouldWarningIfDayToDay() {
+    void shouldErrorIfDayToDay() {
         $("[data-test-id=\"city\"] [class=\"input__control\"]").setValue("Москва");
         $("[data-test-id=\"date\"] [class=\"input__control\"]").sendKeys(Keys.CONTROL + "A");
         $("[data-test-id=\"date\"] [class=\"input__control\"]").sendKeys(Keys.BACK_SPACE);
@@ -64,7 +63,7 @@ public class CarDeliveryTest {
     }
 
     @Test
-    void shouldWarningIfInvalidName() {
+    void shouldErrorIfInvalidName() {
         $("[data-test-id=\"city\"] [class=\"input__control\"]").setValue("Москва");
         $("[data-test-id=\"date\"] [class=\"input__control\"]").sendKeys(Keys.CONTROL + "A");
         $("[data-test-id=\"date\"] [class=\"input__control\"]").sendKeys(Keys.BACK_SPACE);
@@ -79,7 +78,7 @@ public class CarDeliveryTest {
     }
 
     @Test
-    void shouldWarningIfInvalidPhone() {
+    void shouldErrorIfInvalidPhone() {
         $("[data-test-id=\"city\"] [class=\"input__control\"]").setValue("Москва");
         $("[data-test-id=\"date\"] [class=\"input__control\"]").sendKeys(Keys.CONTROL + "A");
         $("[data-test-id=\"date\"] [class=\"input__control\"]").sendKeys(Keys.BACK_SPACE);
@@ -94,7 +93,7 @@ public class CarDeliveryTest {
     }
 
     @Test
-    void shouldWarningIfCheckboxOff() {
+    void shouldErrorIfCheckboxOff() {
         $("[data-test-id=\"city\"] [class=\"input__control\"]").setValue("Москва");
         $("[data-test-id=\"date\"] [class=\"input__control\"]").sendKeys(Keys.CONTROL + "A");
         $("[data-test-id=\"date\"] [class=\"input__control\"]").sendKeys(Keys.BACK_SPACE);
@@ -109,7 +108,7 @@ public class CarDeliveryTest {
     }
 
     @Test
-    void shouldWarningIfPastDate() {
+    void shouldErrorIfPastDate() {
         $("[data-test-id=\"city\"] [class=\"input__control\"]").setValue("Москва");
         $("[data-test-id=\"date\"] [class=\"input__control\"]").sendKeys(Keys.CONTROL + "A");
         $("[data-test-id=\"date\"] [class=\"input__control\"]").sendKeys(Keys.BACK_SPACE);
