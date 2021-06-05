@@ -25,7 +25,7 @@ public class CarDeliveryTest {
         String date = LocalDate.now().plusDays(3).format(ofPattern("dd.MM.yyyy"));
         $("[data-test-id=\"date\"] [class=\"input__control\"]").setValue(date);
         $("[data-test-id=\"name\"] [class=\"input__control\"]").setValue("Александр");
-        $("[data-test-id=\"phone\"] [class=\"input__control\"]").setValue("+79325459322");
+        $("[data-test-id=\"phone\"] [class=\"input__control\"]").setValue("+79325459321");
         $("[data-test-id=\"agreement\"] [class=\"checkbox__box\"]").click();
         $$("button").find(exactText("Забронировать")).click();
         $(byText("Успешно!")).shouldBe(visible, Duration.ofSeconds(15));
