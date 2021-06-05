@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class CarDeliveryTest {
     @BeforeEach
     void setup() {
-        open("http://localhost:8080");
+        open("http://localhost:7777");
     }
 
     @Test
