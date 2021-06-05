@@ -35,13 +35,13 @@ public class CarDeliveryTest {
 
     @Test
     void shouldWarningIfInvalidCity() {
-        $("[data-test-id=\"city\"] [class=\"input__control\"]").setValue("Подмосковье");
+        $("[data-test-id=\"city\"] [class=\"input__control\"]").setValue("Оренбург");
         $("[data-test-id=\"date\"] [class=\"input__control\"]").sendKeys(Keys.CONTROL + "A");
         $("[data-test-id=\"date\"] [class=\"input__control\"]").sendKeys(Keys.BACK_SPACE);
-        String date = LocalDate.now().plusDays(4).format(ofPattern("dd.MM.yyyy"));
+        String date = LocalDate.now().plusDays(3).format(ofPattern("dd.MM.yyyy"));
         $("[data-test-id=\"date\"] [class=\"input__control\"]").setValue(date);
-        $("[data-test-id=\"name\"] [class=\"input__control\"]").setValue("Иван");
-        $("[data-test-id=\"phone\"] [class=\"input__control\"]").setValue("+71112223344");
+        $("[data-test-id=\"name\"] [class=\"input__control\"]").setValue("Александр");
+        $("[data-test-id=\"phone\"] [class=\"input__control\"]").setValue("+79325459322");
         $("[data-test-id=\"agreement\"] [class=\"checkbox__box\"]").click();
         $$("button").find(exactText("Забронировать")).click();
         $(("[data-test-id=\"city\"].input_invalid .input__sub")).shouldBe(visible)
@@ -49,14 +49,29 @@ public class CarDeliveryTest {
     }
 
     @Test
+    void shouldWarningIfDayToDay() {
+        $("[data-test-id=\"city\"] [class=\"input__control\"]").setValue("Москва");
+        $("[data-test-id=\"date\"] [class=\"input__control\"]").sendKeys(Keys.CONTROL + "A");
+        $("[data-test-id=\"date\"] [class=\"input__control\"]").sendKeys(Keys.BACK_SPACE);
+        String date = LocalDate.now().format(ofPattern("dd.MM.yyyy"));
+        $("[data-test-id=\"date\"] [class=\"input__control\"]").setValue(date);
+        $("[data-test-id=\"name\"] [class=\"input__control\"]").setValue("Александр");
+        $("[data-test-id=\"phone\"] [class=\"input__control\"]").setValue("+79325459322");
+        $("[data-test-id=\"agreement\"] [class=\"checkbox__box\"]").click();
+        $$("button").find(exactText("Забронировать")).click();
+        $(("[data-test-id=\"date\"] .input_invalid .input__sub")).shouldBe(visible)
+                .shouldHave(exactText("Заказ на выбранную дату невозможен"));
+    }
+
+    @Test
     void shouldWarningIfInvalidName() {
         $("[data-test-id=\"city\"] [class=\"input__control\"]").setValue("Москва");
         $("[data-test-id=\"date\"] [class=\"input__control\"]").sendKeys(Keys.CONTROL + "A");
         $("[data-test-id=\"date\"] [class=\"input__control\"]").sendKeys(Keys.BACK_SPACE);
-        String date = LocalDate.now().plusDays(4).format(ofPattern("dd.MM.yyyy"));
+        String date = LocalDate.now().plusDays(3).format(ofPattern("dd.MM.yyyy"));
         $("[data-test-id=\"date\"] [class=\"input__control\"]").setValue(date);
-        $("[data-test-id=\"name\"] [class=\"input__control\"]").setValue("Ivan");
-        $("[data-test-id=\"phone\"] [class=\"input__control\"]").setValue("+71112223344");
+        $("[data-test-id=\"name\"] [class=\"input__control\"]").setValue("Alexandr");
+        $("[data-test-id=\"phone\"] [class=\"input__control\"]").setValue("+79325459322");
         $("[data-test-id=\"agreement\"] [class=\"checkbox__box\"]").click();
         $$("button").find(exactText("Забронировать")).click();
         $(("[data-test-id=\"name\"].input_invalid .input__sub")).shouldBe(visible)
@@ -68,10 +83,10 @@ public class CarDeliveryTest {
         $("[data-test-id=\"city\"] [class=\"input__control\"]").setValue("Москва");
         $("[data-test-id=\"date\"] [class=\"input__control\"]").sendKeys(Keys.CONTROL + "A");
         $("[data-test-id=\"date\"] [class=\"input__control\"]").sendKeys(Keys.BACK_SPACE);
-        String date = LocalDate.now().plusDays(4).format(ofPattern("dd.MM.yyyy"));
+        String date = LocalDate.now().plusDays(3).format(ofPattern("dd.MM.yyyy"));
         $("[data-test-id=\"date\"] [class=\"input__control\"]").setValue(date);
-        $("[data-test-id=\"name\"] [class=\"input__control\"]").setValue("Иван");
-        $("[data-test-id=\"phone\"] [class=\"input__control\"]").setValue("81112223344");
+        $("[data-test-id=\"name\"] [class=\"input__control\"]").setValue("Александр");
+        $("[data-test-id=\"phone\"] [class=\"input__control\"]").setValue("79325459322");
         $("[data-test-id=\"agreement\"] [class=\"checkbox__box\"]").click();
         $$("button").find(exactText("Забронировать")).click();
         $(("[data-test-id=\"phone\"].input_invalid .input__sub")).shouldBe(visible)
@@ -83,10 +98,10 @@ public class CarDeliveryTest {
         $("[data-test-id=\"city\"] [class=\"input__control\"]").setValue("Москва");
         $("[data-test-id=\"date\"] [class=\"input__control\"]").sendKeys(Keys.CONTROL + "A");
         $("[data-test-id=\"date\"] [class=\"input__control\"]").sendKeys(Keys.BACK_SPACE);
-        String date = LocalDate.now().plusDays(4).format(ofPattern("dd.MM.yyyy"));
+        String date = LocalDate.now().plusDays(3).format(ofPattern("dd.MM.yyyy"));
         $("[data-test-id=\"date\"] [class=\"input__control\"]").setValue(date);
-        $("[data-test-id=\"name\"] [class=\"input__control\"]").setValue("Иван");
-        $("[data-test-id=\"phone\"] [class=\"input__control\"]").setValue("+71112223344");
+        $("[data-test-id=\"name\"] [class=\"input__control\"]").setValue("Александр");
+        $("[data-test-id=\"phone\"] [class=\"input__control\"]").setValue("+79325459322");
         $$("button").find(exactText("Забронировать")).click();
         $(("[data-test-id=\"agreement\"].input_invalid")).shouldBe(visible);
         String color = $(("[data-test-id=\"agreement\"].input_invalid .checkbox__text")).getCssValue("color");
@@ -100,28 +115,11 @@ public class CarDeliveryTest {
         $("[data-test-id=\"date\"] [class=\"input__control\"]").sendKeys(Keys.BACK_SPACE);
         String date = LocalDate.now().minusDays(1).format(ofPattern("dd.MM.yyyy"));
         $("[data-test-id=\"date\"] [class=\"input__control\"]").setValue(date);
-        $("[data-test-id=\"name\"] [class=\"input__control\"]").setValue("Иван");
-        $("[data-test-id=\"phone\"] [class=\"input__control\"]").setValue("+71112223344");
+        $("[data-test-id=\"name\"] [class=\"input__control\"]").setValue("Александр");
+        $("[data-test-id=\"phone\"] [class=\"input__control\"]").setValue("+79325459322");
         $("[data-test-id=\"agreement\"] [class=\"checkbox__box\"]").click();
         $$("button").find(exactText("Забронировать")).click();
         $(("[data-test-id=\"date\"] .input_invalid .input__sub")).shouldBe(visible)
                 .shouldHave(exactText("Заказ на выбранную дату невозможен"));
     }
-
-    @Test
-    void shouldWarningIfDayToDay() {
-        $("[data-test-id=\"city\"] [class=\"input__control\"]").setValue("Москва");
-        $("[data-test-id=\"date\"] [class=\"input__control\"]").sendKeys(Keys.CONTROL + "A");
-        $("[data-test-id=\"date\"] [class=\"input__control\"]").sendKeys(Keys.BACK_SPACE);
-        String date = LocalDate.now().format(ofPattern("dd.MM.yyyy"));
-        $("[data-test-id=\"date\"] [class=\"input__control\"]").setValue(date);
-        $("[data-test-id=\"name\"] [class=\"input__control\"]").setValue("Иван");
-        $("[data-test-id=\"phone\"] [class=\"input__control\"]").setValue("+71112223344");
-        $("[data-test-id=\"agreement\"] [class=\"checkbox__box\"]").click();
-        $$("button").find(exactText("Забронировать")).click();
-        $(("[data-test-id=\"date\"] .input_invalid .input__sub")).shouldBe(visible)
-                .shouldHave(exactText("Заказ на выбранную дату невозможен"));
-    }
-
-
 }
