@@ -34,7 +34,7 @@ public class CarDeliveryTest {
 
     @Test
     void shouldErrorInvalidCity() {
-        $("[data-test-id=\"city\"] [class=\"input__control\"]").setValue("Оренбург");
+        $("[data-test-id=\"city\"] [class=\"input__control\"]").setValue("Подмосковье");
         $("[data-test-id=\"date\"] [class=\"input__control\"]").sendKeys(Keys.CONTROL + "A");
         $("[data-test-id=\"date\"] [class=\"input__control\"]").sendKeys(Keys.BACK_SPACE);
         String date = LocalDate.now().plusDays(3).format(ofPattern("dd.MM.yyyy"));
